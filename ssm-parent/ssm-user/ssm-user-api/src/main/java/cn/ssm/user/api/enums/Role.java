@@ -1,4 +1,4 @@
-package cn.ssm.core.base.enums;
+package cn.ssm.user.api.enums;
 
 /**
  * @author Zephyr

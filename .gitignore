@@ -1,4 +1,5 @@
 /.idea/
+/ssm-parent/*/*/target/
 /ssm-parent/*/*/output/
 *.iml
 
