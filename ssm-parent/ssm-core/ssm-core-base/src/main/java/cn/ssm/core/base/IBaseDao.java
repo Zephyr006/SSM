@@ -14,13 +14,16 @@ public interface IBaseDao<E, PK extends Serializable>{
 
     int insert(E entity) throws DataAccessException;//2
 
-    E findById(PK id) throws DataAccessException;//3
+    E getById(PK id) throws DataAccessException;//3
 
     int update(E entity) throws DataAccessException;//4
 
     List<E> findAll();
 
     int insertBatch(List<E> list)  throws DataAccessException;
+
+    int deleteBatch(List<E> entityList) throws DataAccessException;
+
 
     //int deleteByEntity(E entity);
 

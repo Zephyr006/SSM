@@ -23,30 +23,26 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private IUserDao userDao;
 
-    public User findByUserName(String userName) {
-        return userName == null ? null : userDao.findByUserName(userName);
+    public User getByUserName(String userName) {
+        return userName == null ? null : userDao.getByUserName(userName);
     }
 
-    public Boolean isNewUser(User user) {
-        if (user.getId() != null && userDao.findById(user.getId()) != null)
-            return false;
-        return true;
+    private Boolean isNewUser(User user) {
+        return user.getId() == null || userDao.getById(user.getId()) == null;
     }
 
-    @Override
-    public User findById(Integer userId) {
-        return userDao.findById(userId);
+    public User getById(Integer userId) {
+        return userDao.getById(userId);
     }
 
     /**
      * 插入一条新数据，数据的id由数据库维护，不需要手动指定
-     *
      * @param user
      * @return boolean
      */
     @Transactional(rollbackFor = Exception.class)
     public Boolean insert(User user) {
-        if (userDao.findByUserName(user.getUserName()) == null) {
+        if (userDao.getByUserName(user.getUserName()) == null) {
             user.setCreateTime(new Date());
             userDao.insert(user);
             return true;
@@ -57,7 +53,6 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 如果是新创建的用户，执行插入操作,否则执行更新操作
-     *
      * @param user
      */
     @Transactional(rollbackFor = Exception.class)
@@ -67,7 +62,7 @@ public class UserServiceImpl implements IUserService {
                 user.setCreateTime(new Date());
                 userDao.insert(user);
             } else {
-                user.setLastModifiedTime(new Date());
+                user.setLastUpdateTime(new Date());
                 userDao.update(user);
             }
             return true;

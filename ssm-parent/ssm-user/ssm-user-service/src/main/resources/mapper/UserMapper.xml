@@ -14,13 +14,13 @@
         <result property="isLocked" column="is_locked"/>
         <result property="role" column="role"/>
         <result property="createTime" column="create_time"/>
-        <result property="lastModifiedTime" column="last_modified_time"/>
+        <result property="lastUpdateTime" column="last_update_time"/>
     </resultMap>
 
     <!-- 用于select查询公用抽取的列 -->
     <sql id="columns">
         <![CDATA[
-            id, user_name, nick_name, password, birthday, is_locked, role, create_time, last_modified_time
+            id, user_name, nick_name, password, birthday, is_locked, role, create_time, last_update_time
         ]]>
     </sql>
 
@@ -33,8 +33,8 @@
             <if test="createTime != null">
                 AND create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="lastModifiedTime != null">
-                AND last_modified_time = #{lastModifiedTime,jdbcType=DATE},
+            <if test="lastUpdateTime != null">
+                AND last_update_time = #{lastUpdateTime,jdbcType=DATE},
             </if>
             <if test="userName != null">
                 AND user_name = #{userName,jdbcType=VARCHAR},
@@ -58,7 +58,7 @@
     </sql>
 
     <delete id="deleteById" parameterType="int">
-        DELETE FROM t_user
+        DELETE FROM sys_user
         <![CDATA[
             WHERE id = #{id,jdbcType=INTEGER}
         ]]>
@@ -66,7 +66,7 @@
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="user">
         <![CDATA[
-            INSERT INTO t_user (
+            INSERT INTO sys_user (
                 id ,
                 user_name ,
                 nick_name ,
@@ -75,7 +75,7 @@
                 is_locked ,
                 role ,
                 create_time ,
-                last_modified_time
+                last_update_time
             ) VALUES (
                 #{id, jdbcType=INTEGER} ,
                 #{userName, jdbcType=VARCHAR} ,
@@ -85,22 +85,22 @@
                 #{isLocked, jdbcType=BIT} ,
                 #{role, jdbcType=SMALLINT} ,
                 now() ,
-                #{lastModifiedTime, jdbcType=TIMESTAMP}
+                #{lastUpdateTime, jdbcType=TIMESTAMP}
             )
         ]]>
     </insert>
 
-    <select id="findById" parameterType="int" resultMap="User">
-        SELECT <include refid="columns"/> FROM t_user
+    <select id="getById" parameterType="int" resultMap="User">
+        SELECT <include refid="columns"/> FROM sys_user
         <![CDATA[
             WHERE id = #{id, jdbcType=INTEGER}
         ]]>
     </select>
 
     <update id="update" parameterType="user">
-        UPDATE t_user
+        UPDATE sys_user
         <trim prefix="set" suffixOverrides=",">
-                last_modified_time = #{lastModifiedTime, jdbcType=TIMESTAMP},
+                last_update_time = #{lastUpdateTime, jdbcType=TIMESTAMP},
             <if test="userName != null">
                 user_name = #{userName,jdbcType=VARCHAR},
             </if>
@@ -124,8 +124,8 @@
     </update>
 
     <insert id="insertBatch" parameterType="list">
-        INSERT INTO t_user ( <include refid="columns"/> ) VALUES
-        <foreach collection="list" item="item" separator=","> (
+        INSERT INTO sys_user ( <include refid="columns"/> ) VALUES
+        <foreach collection="list" item="item" open="(" separator="," close=")">
             #{item.id, jdbcType=INTEGER} ,
             #{item.userName, jdbcType=VARCHAR} ,
             #{item.nickName, jdbcType=VARCHAR} ,
@@ -134,16 +134,23 @@
             #{item.isLocked, jdbcType=BIT} ,
             #{item.role, jdbcType=SMALLINT} ,
             now() ,
-            #{item.lastModifiedTime, jdbcType=TIMESTAMP} )
+            #{item.lastUpdateTime, jdbcType=TIMESTAMP}
         </foreach>
     </insert>
 
+    <delete id="deleteBatch" parameterType="list">
+        DELETE FROM sys_user WHERE id IN
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item.id, jdbcType=INTEGER}
+        </foreach>
+    </delete>
+
     <select id="findAll" resultMap="User">
-        SELECT <include refid="columns"/> FROM t_user
+        SELECT <include refid="columns"/> FROM sys_user
     </select>
 
-    <select id="findByUserName" parameterType="string" resultMap="User">
-        SELECT <include refid="columns"/> FROM t_user
+    <select id="getByUserName" parameterType="string" resultMap="User">
+        SELECT <include refid="columns"/> FROM sys_user
         <![CDATA[
             WHERE user_name = #{userName, jdbcType=VARCHAR}
         ]]>

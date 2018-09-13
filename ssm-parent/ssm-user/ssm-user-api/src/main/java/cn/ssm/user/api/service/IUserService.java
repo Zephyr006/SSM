@@ -8,11 +8,11 @@ import cn.ssm.user.api.model.User;
  */
 public interface IUserService {
 
-    User findById(Integer userId);
+    User getById(Integer userId);
 
     Boolean insert(User user);
 
     Boolean insertOrUpdate(User user);
 
-    User findByUserName(String userName);
+    User getByUserName(String userName);
 }

@@ -3,8 +3,10 @@ package cn.ssm.user;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
+ * dubbo的启动程序
  * @author Zephyr
  * @date 2018/7/18.
+ * @link http://dubbo.apache.org/zh-cn/docs/user/quick-start.html
  */
 public class Provider {
 

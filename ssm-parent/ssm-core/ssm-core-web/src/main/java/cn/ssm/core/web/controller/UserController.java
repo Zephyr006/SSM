@@ -65,7 +65,7 @@ public class UserController {
         //LOGGER.info("用户 " + userName + " 正在进行登录操作...");
         User user = null;
         try{
-            user = userService.findByUserName(userName);
+            user = userService.getByUserName(userName);
         }catch (Exception e){
             LOGGER.error("用户 " +userName+ " 登录异常！！错误信息为：\n" + e);
             model.addAttribute("info","用户名或密码输入错误，请重新输入");

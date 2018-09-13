@@ -10,7 +10,7 @@ import java.util.List;
  * @date 2018/5/16.
  */
 public interface IBaseService<E, PK extends Serializable> {
-    E findById(PK id) throws DataAccessException;
+    E getById(PK id) throws DataAccessException;
 
     int deleteById(PK id) throws DataAccessException;
 
@@ -24,7 +24,7 @@ public interface IBaseService<E, PK extends Serializable> {
 
     //Page<E> findPage(ApiPage query);
 
-    E findByEntity(E entity);
+    E getByEntity(E entity);
 
     List<E> findAll();
 }

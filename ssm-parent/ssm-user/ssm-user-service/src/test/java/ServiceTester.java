@@ -22,7 +22,7 @@ public class ServiceTester {
     @Test
     public void test2(){
         try {
-            User user = userService.findByUserName("user1");
+            User user = userService.getByUserName("user1");
             System.out.println(user.getPassword());
         }catch (Exception e){
             e.printStackTrace();

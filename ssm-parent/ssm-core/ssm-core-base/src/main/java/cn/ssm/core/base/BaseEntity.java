@@ -22,7 +22,7 @@ public abstract class BaseEntity implements Serializable {
     /**
      * 数据信息的最后修改时间，如果创建时间不为空则更新此值，在后台修改，允许为空
      */
-    private Date lastModifiedTime = null;
+    private Date lastUpdateTime = null;
 
     public Integer getId() {
         return id;
@@ -45,13 +45,13 @@ public abstract class BaseEntity implements Serializable {
         //}
     }
 
-    public void setLastModifiedTime(Date lastModifiedTime) {
-        this.lastModifiedTime = (null==lastModifiedTime ? null : (Date)lastModifiedTime.clone() );
+    public void setLastUpdateTime(Date lastUpdateTime) {
+        this.lastUpdateTime = (null==lastUpdateTime ? null : (Date)lastUpdateTime.clone() );
     }
 
-    public Date getLastModifiedTime() {
-        if (null == lastModifiedTime)
+    public Date getLastUpdateTime() {
+        if (null == lastUpdateTime)
             return null;
-        return (Date)lastModifiedTime.clone();
+        return (Date)lastUpdateTime.clone();
     }
 }

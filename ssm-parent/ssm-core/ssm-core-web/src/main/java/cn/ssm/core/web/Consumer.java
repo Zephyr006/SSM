@@ -13,7 +13,7 @@ public class Consumer {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath*:spring-mybatis.xml");
         context.start();
         IUserService userService = (IUserService)context.getBean("userService");
-        User user = userService.findByUserName("user1");
+        User user = userService.getByUserName("user1");
         if (user!=null)
             System.out.println(user.getPassword());
         else

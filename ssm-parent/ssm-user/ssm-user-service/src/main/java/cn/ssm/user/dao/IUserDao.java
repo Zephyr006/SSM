@@ -9,5 +9,5 @@ import cn.ssm.user.api.model.User;
  */
 public interface IUserDao extends IBaseDao<User, Integer> {
 
-    User findByUserName(String userName);
+    User getByUserName(String userName);
 }

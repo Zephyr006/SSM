@@ -33,7 +33,7 @@ public class ServiceTester {
             //user.setRole(Role.TEMPUSER.getIndex());
             //System.out.println(userService.insert(user));
 
-            user = userService.findByUserName("user1");
+            user = userService.getByUserName("user1");
             System.out.println(user);
         }catch (Exception e){
             e.printStackTrace();
