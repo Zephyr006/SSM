@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!--该配置文件只是为了在*Mapper.xml文件中使用别名（alias），不使用别名可以删除该配置文件-->
+<configuration>
+    <settings>
+        <!-- <setting name="logImpl" value="LOG4J"/>   -->
+        <!-- <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <setting name="useColumnLabel" value="true"/>
+        <setting name="useGeneratedKeys" value="false"/>
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <setting name="defaultStatementTimeout" value="25000"/> -->
+        <!--<setting name="logImpl" value="SLF4J"/>-->
+        <setting name="callSettersOnNulls" value="true"/>
+        <!--<setting name="autoMappingBehavior" value="true"/>-->
+    </settings>
+
+
+    <!--直接在下方指定 各个实体类的包路径，即可在*Mapper.xml实体映射文件中直接使用别名：-->
+    <!--别名默认首字母小写，可以使用@Alias注解手动指定别名（重名问题也可以使用@Alias解决）-->
+    <!--已经为许多常见的 Java 类型内建了相应的类型别名。它们都是大小写不敏感的-->
+    <typeAliases>
+        <!--使用‘package’可以直接将对应包下的实体类直接映射为小写字母开头的别名-->
+        <package name="cn.ssm.core.web"/>
+        <!--使用下面的方法可以直接指定对应实体类的别名（叫什么都行），但每一个实体类都需要单独配置-->
+        <!--<typeAlias alias="user" type="cn.ssm.core.auth.model.User"/>-->
+    </typeAliases>
+</configuration>
