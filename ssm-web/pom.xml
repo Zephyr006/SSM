@@ -11,10 +11,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ssm-core-web</artifactId>
+    <artifactId>ssm-web</artifactId>
     <packaging>war</packaging>
 
-    <name>ssm-core-web</name>
+    <name>ssm-web</name>
     <url>
         http://www.example.com
     </url>
@@ -34,7 +34,7 @@
     </dependencies>
 
     <build>
-        <finalName>ssm-core-web</finalName>
+        <finalName>ssm-web</finalName>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
                 <plugin>

@@ -5,21 +5,21 @@ package cn.ssm.user.api.enums;
  * @date 2018/5/15.
  */
 public enum Role {
-    USER("普通用户",0), ADMIN("普通管理员",1), SUPERADMIN("超级管理员",2), TEMPUSER("临时用户",3);
+    USER(0,"普通用户"), ADMIN(1,"普通管理员"), SUPERADMIN(2,"超级管理员"), TEMPUSER(3,"临时用户");
 
     private String name;
-    private int index;
+    private int code;
 
-    Role (String name, int index){
+    Role (int code, String name){
         this.name = name;
-        this.index = index;
+        this.code = code;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getIndex() {
-        return index;
+    public int getCode() {
+        return code;
     }
 }

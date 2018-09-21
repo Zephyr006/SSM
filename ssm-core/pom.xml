@@ -17,9 +17,6 @@
     <!--<name>ssm-core</name>-->
     <modules>
         <module>
-            ssm-core-web
-        </module>
-        <module>
             ssm-core-base
         </module>
     </modules>

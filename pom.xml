@@ -6,12 +6,12 @@
 
     <groupId>SSM</groupId>
     <artifactId>ssm-parent</artifactId>
-    <packaging>pom</packaging>
-    <!--<packaging>war</packaging>-->
+    <packaging>pom</packaging> <!-- 父项目的packaging属性必须为pom -->
 
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>ssm-core</module>
+        <module>ssm-web</module>
         <module>ssm-user</module>
     </modules>
 
