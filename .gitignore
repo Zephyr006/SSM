@@ -1,6 +1,8 @@
 /.idea/
-/ssm-parent/*/*/target/
-/ssm-parent/*/*/output/
+/ssm-*/target/
+/ssm-*/output/
+/ssm-*/*/target/
+/ssm-*/*/output/
 *.iml
 
 
