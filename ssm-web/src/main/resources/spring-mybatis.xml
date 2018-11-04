@@ -23,6 +23,9 @@
 
     <!-- 自动扫描包下的注解 -->
     <context:component-scan base-package="cn.ssm.core.web"/>
+
+    <bean class="cn.ssm.core.base.utils.SpringContextUtil"/>
+
     <import resource="classpath:dubbo/dubbo-consumer.xml"/>
 
 
