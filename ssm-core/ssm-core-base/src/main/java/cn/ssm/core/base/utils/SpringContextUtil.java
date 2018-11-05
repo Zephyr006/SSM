@@ -4,6 +4,8 @@ import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
 
 /**
  * 以静态变量保存Spring的ApplicationContext, 可在任何地方任何时候取出ApplicaitonContext.
@@ -12,6 +14,8 @@ import org.springframework.context.ApplicationContextAware;
  * @author Zephyr
  * @date 2018/11/4
  */
+@Service
+@Lazy(value = false)  //指定Spring预初始化该Bean
 public class SpringContextUtil implements ApplicationContextAware, DisposableBean {
 
     public static ApplicationContext context;
