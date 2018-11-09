@@ -8,8 +8,7 @@ import java.util.Date;
  * @date 2018/4/30.
  */
 public abstract class BaseEntity implements Serializable {
-    private static final long serialVersionUID = -7200095849148417467L;
-    protected static final String TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    protected static final String DEFAULT_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     /**
      * 唯一主键，非空，自增，默认由数据库管理
@@ -22,7 +21,7 @@ public abstract class BaseEntity implements Serializable {
     /**
      * 数据信息的最后修改时间，如果创建时间不为空则更新此值，在后台修改，允许为空
      */
-    private Date lastUpdateTime = null;
+    private Date updateTime = null;
 
     public Integer getId() {
         return id;
@@ -46,12 +45,13 @@ public abstract class BaseEntity implements Serializable {
     }
 
     public void setLastUpdateTime(Date lastUpdateTime) {
-        this.lastUpdateTime = (null==lastUpdateTime ? null : (Date)lastUpdateTime.clone() );
+        this.updateTime = (null==lastUpdateTime ? null : (Date)lastUpdateTime.clone() );
     }
 
     public Date getLastUpdateTime() {
-        if (null == lastUpdateTime)
+        if (null == updateTime) {
             return null;
-        return (Date)lastUpdateTime.clone();
+        }
+        return (Date)updateTime.clone();
     }
 }
