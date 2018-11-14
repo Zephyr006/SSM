@@ -3,7 +3,6 @@ package cn.ssm.user.api.model;
 import cn.ssm.core.base.BaseEntity;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 /**
  * @author Zephyr
@@ -23,11 +22,6 @@ public class User extends BaseEntity implements Serializable {
      * 密码：只能包含字符，不能包含汉字和非法字符
      */
     private String password;
-    /**
-     * 出生年月日，可以为空
-     */
-    //@DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date birthday;
     /**
      * 该账户是否处于被锁定状态，false表示未锁定的正常状态（默认），true表示锁定,注销则直接删除账号
      */
@@ -60,14 +54,6 @@ public class User extends BaseEntity implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Date getBirthday() {
-        return birthday == null ? null : (Date) birthday.clone();
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = (birthday == null ? null : (Date) birthday.clone());
     }
 
     public boolean isLocked() {

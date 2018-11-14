@@ -14,27 +14,33 @@ public abstract class BaseService<E, PK extends Serializable> implements IBaseSe
 
     protected abstract IBaseDao<E, PK> getEntityDao();
 
+    @Override
     public E getById(PK id) throws DataAccessException {
         return getEntityDao().getById(id);
     }
 
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public int deleteById(PK id) throws DataAccessException {
         return getEntityDao().deleteById(id);
     }
 
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public int insert(E entity) throws DataAccessException {
         return getEntityDao().insert(entity);
     }
 
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public int insertBatch(List<E> entityList) throws DataAccessException {
-        if (entityList == null  ||  entityList.isEmpty())
+        if (entityList == null  ||  entityList.isEmpty()) {
             return 0;
+        }
         return getEntityDao().insertBatch(entityList);
     }
 
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public int update(E entity) throws DataAccessException {
         if (entity == null)
@@ -42,6 +48,7 @@ public abstract class BaseService<E, PK extends Serializable> implements IBaseSe
         return getEntityDao().update(entity);
     }
 
+    @Override
     public List<E> findAll() {
         return getEntityDao().findAll();
     }
