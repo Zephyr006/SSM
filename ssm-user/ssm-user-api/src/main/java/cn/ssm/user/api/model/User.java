@@ -25,7 +25,7 @@ public class User extends BaseEntity implements Serializable {
     /**
      * 该账户是否处于被锁定状态，false表示未锁定的正常状态（默认），true表示锁定,注销则直接删除账号
      */
-    private boolean isLocked;
+    private boolean status;
     /**
      * 用户身份：0代表普通用户,1代表管理员，默认普通用户
      */
@@ -56,14 +56,6 @@ public class User extends BaseEntity implements Serializable {
         this.password = password;
     }
 
-    public boolean isLocked() {
-        return isLocked;
-    }
-
-    public void setIsLocked(boolean locked) {
-        isLocked = locked;
-    }
-
     public int getRole() {
         return role;
     }
@@ -75,5 +67,13 @@ public class User extends BaseEntity implements Serializable {
     @Override
     public String toString() {
         return "User@ userName=" + getUserName() + " ,password=" + getPassword();
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

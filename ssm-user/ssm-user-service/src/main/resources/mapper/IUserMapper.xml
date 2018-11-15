@@ -3,24 +3,23 @@
         "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!-- 命名空间为该映射文件对应实体类的全路径 -->
-<mapper namespace="cn.ssm.user.dao.IUserDao">
+<mapper namespace="cn.ssm.user.mapper.IUserMapper">
 
     <resultMap id="User" type="cn.ssm.user.api.model.User">
         <result property="id" column="id"/>
         <result property="userName" column="user_name"/>
         <result property="nickName" column="nick_name"/>
         <result property="password" column="password"/>
-        <result property="birthday" column="birthday"/>
-        <result property="isLocked" column="is_locked"/>
+        <result property="status" column="status"/>
         <result property="role" column="role"/>
-        <result property="createTime" column="create_time"/>
-        <result property="lastUpdateTime" column="last_update_time"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
     </resultMap>
 
     <!-- 用于select查询公用抽取的列 -->
     <sql id="columns">
         <![CDATA[
-            id, user_name, nick_name, password, birthday, is_locked, role, create_time, last_update_time
+            id, user_name, nick_name, password, birthday, status, role, create_date, update_date
         ]]>
     </sql>
 
@@ -30,10 +29,10 @@
                 <when test=""></when>
                 <otherwise></otherwise>
             </choose>
-            <if test="createTime != null">
+            <if test="createDate != null">
                 AND create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="lastUpdateTime != null">
+            <if test="updateDate != null">
                 AND last_update_time = #{lastUpdateTime,jdbcType=DATE},
             </if>
             <if test="userName != null">
@@ -48,8 +47,8 @@
             <if test="birthday != null">
                 AND birthday = #{birthday,jdbcType=DATE},
             </if>
-            <if test="isLocked != null">
-                AND is_locked = #{isLocked,jdbcType=BIT},
+            <if test="status != null">
+                AND status = #{status,jdbcType=VARCHAR},
             </if>
             <if test="role != null">
                 AND role = #{role,jdbcType=SMALLINT},
@@ -72,20 +71,20 @@
                 nick_name ,
                 password ,
                 birthday ,
-                is_locked ,
+                status ,
                 role ,
-                create_time ,
-                last_update_time
+                create_date ,
+                update_date
             ) VALUES (
                 #{id, jdbcType=INTEGER} ,
                 #{userName, jdbcType=VARCHAR} ,
                 #{nickName, jdbcType=VARCHAR} ,
                 #{password, jdbcType=VARCHAR} ,
                 #{birthday, jdbcType=DATE} ,
-                #{isLocked, jdbcType=BIT} ,
+                #{status, jdbcType=VARCHAR} ,
                 #{role, jdbcType=SMALLINT} ,
                 now() ,
-                #{lastUpdateTime, jdbcType=TIMESTAMP}
+                #{updateDate, jdbcType=TIMESTAMP}
             )
         ]]>
     </insert>
@@ -110,11 +109,8 @@
             <if test="password != null">
                 password = #{password,jdbcType=VARCHAR},
             </if>
-            <if test="birthday != null">
-                birthday = #{birthday,jdbcType=DATE},
-            </if>
-            <if test="isLocked != null">
-                is_locked = #{isLocked,jdbcType=BIT},
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
             </if>
             <if test="role != null">
                 role = #{role,jdbcType=SMALLINT},
@@ -131,10 +127,10 @@
             #{item.nickName, jdbcType=VARCHAR} ,
             #{item.password, jdbcType=VARCHAR} ,
             #{item.birthday, jdbcType=DATE} ,
-            #{item.isLocked, jdbcType=BIT} ,
+            #{item.status, jdbcType=VARCHAR} ,
             #{item.role, jdbcType=SMALLINT} ,
             now() ,
-            #{item.lastUpdateTime, jdbcType=TIMESTAMP}
+            #{item.updateDate, jdbcType=TIMESTAMP}
         </foreach>
     </insert>
 
@@ -149,7 +145,7 @@
         SELECT <include refid="columns"/> FROM sys_user
     </select>
 
-    <select id="getByUserName" parameterType="string" resultMap="User">
+    <select id="selectByUserName" parameterType="string" resultMap="User">
         SELECT <include refid="columns"/> FROM sys_user
         <![CDATA[
             WHERE user_name = #{userName, jdbcType=VARCHAR}

@@ -5,7 +5,6 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
@@ -13,9 +12,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @date 2018/7/19.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/spring-mybatis.xml")
+//@ContextConfiguration("/spring-mybatis.xml")
 public class ServiceTester {
-    final Logger logger = LoggerFactory.getLogger("testtt");
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private IUserService userService;

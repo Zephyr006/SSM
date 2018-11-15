@@ -1,14 +1,12 @@
 package cn.ssm.core.web.controller;
 
 
-import cn.ssm.core.base.utils.DateUtil;
 import cn.ssm.user.api.model.User;
 import cn.ssm.user.api.service.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,7 +14,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.text.ParseException;
 
 /**
  * @author Zephyr
@@ -25,12 +22,12 @@ import java.text.ParseException;
 @Controller
 @RequestMapping("/account")
 public class UserController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
     @Resource
     private IUserService userService;
 
     @RequestMapping(value = "/login")
-    public String login(Model model, HttpServletRequest request) {
+    public String login(Model model) {
         model.addAttribute("action","login");
         return "login";
     }
@@ -105,14 +102,8 @@ public class UserController {
         user.setUserName(req.getParameter("userName"));
         user.setPassword(req.getParameter("password"));
         user.setNickName(req.getParameter("userName"));
-        if(null != req.getParameter("nickName"))
+        if(null != req.getParameter("nickName")) {
             user.setNickName(req.getParameter("nickName"));
-        if( !StringUtils.isEmpty(req.getParameter("birthday")) ){
-            try {
-                user.setBirthday(DateUtil.stringToDate(req.getParameter("birthday")));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
         }
         try {
             if( userService.insert(user) ){

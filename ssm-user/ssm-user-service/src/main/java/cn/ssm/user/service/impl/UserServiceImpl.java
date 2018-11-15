@@ -3,7 +3,7 @@ package cn.ssm.user.service.impl;
 
 import cn.ssm.user.api.model.User;
 import cn.ssm.user.api.service.IUserService;
-import cn.ssm.user.dao.IUserDao;
+import cn.ssm.user.mapper.IUserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +18,13 @@ import java.util.Date;
  */
 @Service("userService")
 public class UserServiceImpl implements IUserService {
-    final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private IUserDao userDao;
+    private IUserMapper userDao;
 
     public User getByUserName(String userName) {
-        return userName == null ? null : userDao.getByUserName(userName);
+        return userName == null ? null : userDao.selectByUserName(userName);
     }
 
     private Boolean isNewUser(User user) {
@@ -42,7 +42,7 @@ public class UserServiceImpl implements IUserService {
      */
     @Transactional(rollbackFor = Exception.class)
     public Boolean insert(User user) {
-        if (userDao.getByUserName(user.getUserName()) == null) {
+        if (userDao.selectByUserName(user.getUserName()) == null) {
             user.setCreateTime(new Date());
             userDao.insert(user);
             return true;
