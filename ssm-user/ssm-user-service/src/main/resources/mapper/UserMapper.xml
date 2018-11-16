@@ -148,7 +148,7 @@
     <select id="selectByUserName" parameterType="string" resultMap="User">
         SELECT <include refid="columns"/> FROM sys_user
         <![CDATA[
-            WHERE user_name = #{userName, jdbcType=VARCHAR}
+            WHERE user_name = #{userName}
         ]]>
     </select>
 </mapper>

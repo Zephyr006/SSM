@@ -10,10 +10,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class Consumer {
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath*:spring-mybatis.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring-mybatis.xml");
         context.start();
-        IUserService userService = context.getBean(IUserService.class);
-        User user = userService.getByUserName("user1");
+        IUserService userService = (IUserService) context.getBean("userService");
+        User user = userService.getByUserName("fghj");
         if (user!=null)
             System.out.println(user.getPassword());
         else
