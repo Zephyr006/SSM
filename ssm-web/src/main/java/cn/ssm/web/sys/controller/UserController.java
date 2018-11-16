@@ -1,4 +1,4 @@
-package cn.ssm.core.web.controller;
+package cn.ssm.web.sys.controller;
 
 
 import cn.ssm.user.api.model.User;
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @RequestMapping("/account")
 public class UserController {
-    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Resource
     private IUserService userService;
 
@@ -64,7 +64,7 @@ public class UserController {
         try{
             user = userService.getByUserName(userName);
         }catch (Exception e){
-            LOGGER.error("用户 " +userName+ " 登录异常！！错误信息为：\n" + e);
+            logger.error("用户 " +userName+ " 登录异常！！错误信息为：\n" + e);
             model.addAttribute("info","用户名或密码输入错误，请重新输入");
             model.addAttribute("action","login");
             return "login_or_register";
@@ -75,7 +75,7 @@ public class UserController {
             if(cookies != null) {
                 for (Cookie cookie : cookies) {
                     if("userName".equals(cookie.getName())){
-                        LOGGER.info("User already logged in, cookieValue=" + cookie.getValue());
+                        logger.info("User already logged in, cookieValue=" + cookie.getValue());
                         return "index";
                     }
                 }
@@ -84,10 +84,10 @@ public class UserController {
             cookie.setMaxAge(60*60*24); //one day
             resp.addCookie(cookie);
             model.addAttribute("info", "登录成功");
-            LOGGER.info("用户 " +userName+ " 登录成功！");
+            logger.info("用户 " +userName+ " 登录成功！");
             return "index";
         }else {
-            LOGGER.warn("用户 " +userName+ " 登录失败，其输入的用户名或密码错误！");
+            logger.warn("用户 " +userName+ " 登录失败，其输入的用户名或密码错误！");
             model.addAttribute("info","用户名或密码输入错误，请重新输入");
             model.addAttribute("action","login");
             return "login_or_register";
@@ -107,15 +107,15 @@ public class UserController {
         }
         try {
             if( userService.insert(user) ){
-                LOGGER.info("用户注册成功，将跳转到登录页面！！！");
+                logger.info("用户注册成功，将跳转到登录页面！！！");
                 return "redirect:/account/login";
             }else {
-                LOGGER.info("当前使用的注册用户名重复，将再次跳转回注册页面！！！");
+                logger.info("当前使用的注册用户名重复，将再次跳转回注册页面！！！");
                 model.addAttribute("info","用户名重复，请使用其他用户名注册！");
                 return "redirect:/account/register";
             }
         } catch (Exception e){
-            LOGGER.error("UserService.insert(user)方法异常，用户注册信息写入失败！错误信息如下：\n" + e);
+            logger.error("UserService.insert(user)方法异常，用户注册信息写入失败！错误信息如下：\n" + e);
             return "redirect:/account/register";
         }
     }

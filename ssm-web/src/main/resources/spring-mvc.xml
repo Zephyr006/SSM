@@ -14,7 +14,7 @@
     <mvc:annotation-driven/>
 
     <!-- 扫描bean，如：@Component @Controller @Service等 -->
-    <context:component-scan base-package="cn.ssm.core.web.controller"/>
+    <context:component-scan base-package="cn.ssm.web"/>
 
     <!--ViewResolver 视图解析器，用于支持Servlet、JSP视图解析-->
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

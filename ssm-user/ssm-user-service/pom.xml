@@ -15,12 +15,8 @@
     <dependencies>
         <dependency>
             <groupId>SSM</groupId>
-            <artifactId>
-                ssm-user-api
-            </artifactId>
-            <version>
-                1.0-SNAPSHOT
-            </version>
+            <artifactId>ssm-user-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

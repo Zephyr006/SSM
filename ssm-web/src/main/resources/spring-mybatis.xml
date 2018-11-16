@@ -13,6 +13,7 @@
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
+                <value>classpath:conf/dubbo.properties</value>
                 <!--log4j2.properties日志文件只能放在classpath下，否则需做特殊配置-->
                 <value>classpath:log4j2.properties</value>
                 <!--<value>classpath:conf/jdbc.properties</value>-->
@@ -22,7 +23,7 @@
 
 
     <!-- 自动扫描包下的注解 -->
-    <context:component-scan base-package="cn.ssm.core.web"/>
+    <context:component-scan base-package="cn.ssm.web"/>
 
     <import resource="classpath:dubbo/dubbo-consumer.xml"/>
 

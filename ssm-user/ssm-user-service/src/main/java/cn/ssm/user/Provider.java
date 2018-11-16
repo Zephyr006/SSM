@@ -13,7 +13,7 @@ public class Provider {
     public static void main(String[] args) {
         try {
             ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath*:spring-mybatis.xml");
-            System.out.println(context.getDisplayName() + " : here");
+            System.out.println("\n\ncontext name:  " + context.getDisplayName());
             context.start();
             System.out.println("dubbo services started......");
             System.in.read();  //使程序进入等待输入的状态，使服务持久运行

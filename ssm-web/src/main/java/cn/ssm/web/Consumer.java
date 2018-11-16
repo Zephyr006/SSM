@@ -1,4 +1,4 @@
-package cn.ssm.core.web;
+package cn.ssm.web;
 
 import cn.ssm.user.api.model.User;
 import cn.ssm.user.api.service.IUserService;
@@ -12,7 +12,7 @@ public class Consumer {
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath*:spring-mybatis.xml");
         context.start();
-        IUserService userService = (IUserService)context.getBean("userService");
+        IUserService userService = context.getBean(IUserService.class);
         User user = userService.getByUserName("user1");
         if (user!=null)
             System.out.println(user.getPassword());
