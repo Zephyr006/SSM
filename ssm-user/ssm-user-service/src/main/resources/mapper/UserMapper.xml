@@ -19,7 +19,7 @@
     <!-- 用于select查询公用抽取的列 -->
     <sql id="columns">
         <![CDATA[
-            id, user_name, nick_name, password, birthday, status, role, create_date, update_date
+            id, user_name, nick_name, password, status, role, create_date, update_date
         ]]>
     </sql>
 
@@ -43,9 +43,6 @@
             </if>
             <if test="password != null">
                 AND password = #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="birthday != null">
-                AND birthday = #{birthday,jdbcType=DATE},
             </if>
             <if test="status != null">
                 AND status = #{status,jdbcType=VARCHAR},
@@ -148,7 +145,7 @@
     <select id="selectByUserName" parameterType="string" resultMap="User">
         SELECT <include refid="columns"/> FROM sys_user
         <![CDATA[
-            WHERE user_name = #{userName}
+            WHERE user_name = #{userName, jdbcType=VARCHAR}
         ]]>
     </select>
 </mapper>
