@@ -8,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @date 2018/7/18.
  * @link http://dubbo.apache.org/zh-cn/docs/user/quick-start.html
  */
-public class Provider {
+public class UserServiceProvider {
 
     public static void main(String[] args) {
         try {
