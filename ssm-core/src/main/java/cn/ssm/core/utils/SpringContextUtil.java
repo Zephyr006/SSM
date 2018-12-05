@@ -1,4 +1,4 @@
-package cn.ssm.core.base.utils;
+package cn.ssm.core.utils;
 
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.DisposableBean;

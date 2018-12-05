@@ -1,4 +1,4 @@
-package cn.ssm.core.base.utils;
+package cn.ssm.core.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +12,7 @@ import java.util.TimeZone;
  * @author Zephyr
  * @date 2018/5/15.
  */
-public class DateUtil {
+public class DateUtils {
     /**
      * 默认时间格式。 时间格式中，HH表示24小时制，hh表示12小时制
      */

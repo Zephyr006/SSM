@@ -123,11 +123,11 @@
         </dependency>
         <!--DataBase connector end-->
 
-        <!--<dependency>-->
-            <!--<groupId>com.baomidou</groupId>-->
-            <!--<artifactId>mybatis-plus</artifactId>-->
-            <!--<version>${mybatis-plus.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
         <!--mybatis begin-->
         <dependency>
             <groupId>org.mybatis</groupId>

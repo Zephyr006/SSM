@@ -33,6 +33,7 @@
     <!-- DAO接口所在包名，Spring会自动查找对应包下的类 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!--<property name="basePackage" value="com.baomidou.mybatisplus.test.h2.entity.query"/>-->
         <property name="basePackage" value="cn.ssm.user.mapper"/>
     </bean>
 
@@ -49,14 +50,45 @@
     </bean>
 
     <!-- spring和MyBatis完美整合，不需要单独配置mybatis的配置文件，即可将实体类的映射文件自动绑定到接口 -->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <!--Attention：如果不使用mybatis-plus，此处的类应改为class="org.mybatis.spring.SqlSessionFactoryBean"-->
+    <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <!--此处加载mybatis配置文件只是为了在*Mapper.xml文件中使用别名（alias），不使用别名可以删除该配置文件-->
         <property name="configLocation" value="classpath:conf/mybatis-config.xml"/>
         <!-- 自动扫描mapping.xml文件 -->
         <property name="mapperLocations" value="classpath:mapper/*Mapper.xml"/>
         <!--<property name="mapperLocations" value="classpath:sqlmap/*.xml"></property>-->
+        <!-- mybatisplus 全局配置注入 -->
+        <property name="globalConfig" ref="globalConfig"/>
+        <!--mybatisplus插件配置-->
+        <property name="plugins">
+            <array>
+                <!-- 分页插件配置 -->
+                <bean id="paginationInterceptor"
+                      class="com.baomidou.mybatisplus.plugins.PaginationInterceptor"/>
+                <!-- 乐观锁插件 -->
+                <bean id="optimisticLockerInterceptor"
+                      class="com.baomidou.mybatisplus.plugins.OptimisticLockerInterceptor">
+                </bean>
+                <!-- 性能拦截器，兼打印sql，不建议生产环境配置-->
+                <bean id="performanceInterceptor"
+                      class="com.baomidou.mybatisplus.plugins.PerformanceInterceptor"/>
+            </array>
+        </property>
     </bean>
+
+    <!-- 定义 mybatisplus 全局策略 -->
+    <bean id="globalConfig" class="com.baomidou.mybatisplus.entity.GlobalConfiguration">
+        <!-- 全局ID类型： 0, "数据库ID自增"， 1, "用户输入ID", 2, "全局唯一ID", 3, "全局唯一ID"-->
+        <property name="idType" value="0"/>
+        <!--主键Sequence-->
+        <!--<property name="keyGenerator" ref="keyGenerator"/>-->
+        <!--数据库字段下划线命名-->
+        <property name="dbColumnUnderline" value="true" />
+        <!-- 公共字段填充处理器 -->
+        <property name="metaObjectHandler" ref="baseMetaObjectHandler"/>
+    </bean>
+    <bean id="baseMetaObjectHandler" class="cn.ssm.core.base.handler.BaseMetaObjectHandler"/>
 
     <!-- 一：配置事务管理器,用JtaTransactionManager做全局事务管理  transactionManager是该bean的默认名称-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

@@ -1,6 +1,7 @@
 package cn.ssm.web.sys.controller;
 
 
+import cn.ssm.core.base.common.BaseController;
 import cn.ssm.user.api.model.User;
 import cn.ssm.user.api.service.IUserService;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -21,10 +23,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping("/account")
-public class UserController {
+public class UserController extends BaseController<User> {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Resource
     private IUserService userService;
+
+    @PostConstruct
+    public void initService(){
+        setBaseService(userService);
+    }
+
 
     @RequestMapping(value = "/login")
     public String login(Model model) {

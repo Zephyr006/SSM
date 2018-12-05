@@ -13,10 +13,14 @@ public class Consumer {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring-mybatis.xml");
         context.start();
         IUserService userService = (IUserService) context.getBean("userService");
-        User user = userService.getByUserName("fghj");
-        if (user!=null)
-            System.out.println(user.getPassword());
-        else
-            System.out.println("user is null....");
+        User user = new User();
+        //user.setId(1);
+        user.setUserName("name");
+        user.setPassword("1231");
+        user.setId(2);
+        userService.insertOrUpdate(user);
+        //userService.updateById(user);
+        //List<User> users = userService.selectAll();
+            System.out.println("finish");
     }
 }
