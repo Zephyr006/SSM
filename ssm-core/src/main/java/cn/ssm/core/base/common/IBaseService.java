@@ -11,7 +11,7 @@ import java.util.List;
 public interface IBaseService<E> extends IService<E> {
 
     /**
-     * 插入或更新一条数据 （不使用dubbo调用service时使用默认的insert方法即可）
+     * 插入或更新一条数据 （不使用dubbo调用service时/不需要返回的id时 使用默认的insert方法即可）
      *
      * 执行insert或update操作后，数据的id会自动填充回实体，但是在使用dubbo的形式调用service时，
      * 默认的insert接口方法只会返回boolean值，消费者无法获得insert后的实体的id，本接口就是为了解决这个问题
