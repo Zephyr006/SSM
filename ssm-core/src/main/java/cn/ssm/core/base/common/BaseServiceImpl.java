@@ -14,6 +14,14 @@ public abstract class BaseServiceImpl<M extends BaseMapper<E>, E> extends Servic
         implements IBaseService<E> {
 
     @Override
+    public E insertOrUpdate(E entity, boolean returnEntity) {
+        if (super.insertOrUpdate(entity)){
+            return entity;
+        }
+        return returnEntity ? entity : null;
+    }
+
+    @Override
     public List<E> selectAll() {
         return super.selectList(new EntityWrapper<E>().eq("1","1"));
     }
