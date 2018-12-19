@@ -4,6 +4,8 @@ import cn.ssm.user.api.model.User;
 import cn.ssm.user.api.service.IUserService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.List;
+
 /**
  * @author Zephyr
  * @date 2018/7/21.
@@ -18,9 +20,9 @@ public class Consumer {
         user.setUserName("name");
         user.setPassword("1231");
         user.setId(2);
-        userService.insertOrUpdate(user);
+        //userService.insertOrUpdate(user);
         //userService.updateById(user);
-        //List<User> users = userService.selectAll();
-            System.out.println("finish");
+        List<User> users = userService.selectAll();
+        System.out.println("finish");
     }
 }

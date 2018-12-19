@@ -7,7 +7,7 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         <![CDATA[
-            id, user_name, nick_name, password, role, is_deleted, create_time, update_time
+            id, user_name, nick_name, password, role, deleted, create_time, update_time
         ]]>
     </sql>
 

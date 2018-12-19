@@ -22,8 +22,8 @@ public abstract class BaseEntity<PK> implements Serializable {
     /**
      * 逻辑删除标记：  “1” 删除， “0” 正常
      */
-    @TableField(value = "is_deleted")
-    private String isDeleted;
+    @TableField(value = "deleted")
+    private boolean deleted;
     /**
      * 数据的创建时间，由 BaseMetaObjectHandler 维护
      */
@@ -44,13 +44,10 @@ public abstract class BaseEntity<PK> implements Serializable {
         this.id = id;
     }
 
-    public String getIsDeleted() {
-        return isDeleted;
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
-    public void setIsDeleted(String isDeleted) {
-        this.isDeleted = isDeleted;
-    }
 
     public Date getCreateTime() {
         return (null==createTime ? null : (Date)createTime.clone());
@@ -76,9 +73,8 @@ public abstract class BaseEntity<PK> implements Serializable {
         return (Date)updateTime.clone();
     }
 
-    //额外的方法用于判断数据是否已经逻辑删除
-    public boolean isDeleted(){
-        return this.isDeleted == null || "1".equals(this.isDeleted);
+    public boolean isDeleted() {
+        return deleted;
     }
 
     //额外的方法用于判断是否为空

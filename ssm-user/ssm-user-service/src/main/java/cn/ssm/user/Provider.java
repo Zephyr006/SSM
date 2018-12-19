@@ -14,7 +14,7 @@ public class Provider {
         try {
             ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath*:spring-mybatis.xml");
             context.start();
-            System.out.println("dubbo services started......");
+            System.out.println("dubbo user-service started......");
             System.in.read();  //使程序进入等待输入的状态，使服务持久运行
             System.out.println("dubbo services end......");
         } catch (Exception e) {
